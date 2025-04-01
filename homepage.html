@@ -1,86 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Homepage</title>
-    <style>
-        /* Dark mode styling */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #ffffff;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .shortcut {
-            background: #1e1e1e;
-            border-radius: 15px;
-            padding: 15px;
-            width: 130px;
-            text-align: center;
-            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-            transition: transform 0.2s, box-shadow 0.3s;
-        }
-        .shortcut:hover {
-            transform: scale(1.1);
-            box-shadow: 0px 6px 15px rgba(255, 255, 255, 0.2);
-        }
-        .shortcut img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
-        .shortcut a {
-            text-decoration: none;
-            color: #ffffff;
-            font-weight: bold;
-            display: block;
-            font-size: 1.1em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Custom Homepage</title>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1a1a1a, #121212);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    header {
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      letter-spacing: 2px;
+    }
+    #addShortcut {
+      background-color: #ff9800;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    #addShortcut:hover {
+      background-color: #e68900;
+    }
+    /* Container Grid */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto 20px;
+    }
+    /* Card Style */
+    .card {
+      background-color: #242424;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+    /* Icon Styling */
+    .card img {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 15px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      padding: 8px;
+    }
+    /* Link Style */
+    .card a {
+      text-decoration: none;
+      color: #e0e0e0;
+      font-size: 1.2em;
+      display: block;
+      transition: color 0.3s;
+    }
+    .card a:hover {
+      color: #ff9800;
+    }
+  </style>
 </head>
 <body>
-    <h1>🚀 My Favorite Websites</h1>
-    <div class="container">
-        <div class="shortcut">
-            <a href="https://www.google.com">
-                <img src="https://www.google.com/favicon.ico" alt="Google">
-                Google
-            </a>
-        </div>
-        <div class="shortcut">
-            <a href="https://www.github.com">
-                <img src="https://github.com/favicon.ico" alt="GitHub">
-                GitHub
-            </a>
-        </div>
-        <div class="shortcut">
-            <a href="https://www.reddit.com">
-                <img src="https://www.redditstatic.com/favicon.ico" alt="Reddit">
-                Reddit
-            </a>
-        </div>
-        <div class="shortcut">
-            <a href="https://www.wikipedia.org">
-                <img src="https://www.wikipedia.org/static/favicon/wikipedia.ico" alt="Wikipedia">
-                Wikipedia
-            </a>
-        </div>
+  <header>
+    <h1>My Favorites</h1>
+    <button id="addShortcut">Add Shortcut</button>
+  </header>
+  <main class="container">
+    <div class="card">
+      <a href="https://www.google.com" target="_blank">
+        <img src="https://www.google.com/favicon.ico" alt="Google">
+        Google
+      </a>
     </div>
+    <div class="card">
+      <a href="https://www.github.com" target="_blank">
+        <img src="https://github.com/favicon.ico" alt="GitHub">
+        GitHub
+      </a>
+    </div>
+    <div class="card">
+      <a href="https://www.reddit.com" target="_blank">
+        <img src="https://www.redditstatic.com/favicon.ico" alt="Reddit">
+        Reddit
+      </a>
+    </div>
+    <div class="card">
+      <a href="https://www.wikipedia.org" target="_blank">
+        <img src="https://www.wikipedia.org/static/favicon/wikipedia.ico" alt="Wikipedia">
+        Wikipedia
+      </a>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("addShortcut").addEventListener("click", function() {
+      // Prompt the user for the website name and URL
+      let name = prompt("Enter website name:");
+      if (!name) return;
+      
+      let url = prompt("Enter website URL (include https://):");
+      if (!url) return;
+      
+      // Use the provided URL to attempt to load the favicon
+      // If favicon not found, browser will display broken image (could be replaced with a default icon if desired)
+      let icon = url + "/favicon.ico";
+
+      // Create the new card elements
+      let container = document.querySelector(".container");
+      let card = document.createElement("div");
+      card.className = "card";
+
+      let link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank"; // Open link in new tab
+      
+      let image = document.createElement("img");
+      image.src = icon;
+      image.alt = name;
+
+      // Append the new elements
+      link.appendChild(image);
+      link.appendChild(document.createTextNode(name));
+      card.appendChild(link);
+      container.appendChild(card);
+    });
+  </script>
 </body>
 </html>

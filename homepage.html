@@ -52,6 +52,7 @@
     }
     /* Card Style */
     .card {
+      position: relative;
       background-color: #242424;
       border-radius: 15px;
       padding: 20px;
@@ -62,6 +63,21 @@
     .card:hover {
       transform: translateY(-10px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+    /* Remove Button Style */
+    .remove-button {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      background-color: transparent;
+      border: none;
+      font-size: 1.2em;
+      color: #ff9800;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .remove-button:hover {
+      color: #e68900;
     }
     /* Icon Styling */
     .card img {
@@ -90,26 +106,31 @@
     <h1>My Favorites</h1>
     <button id="addShortcut">Add Shortcut</button>
   </header>
-  <main class="container">
+  <main class="container" id="shortcutContainer">
+    <!-- Example Cards -->
     <div class="card">
+      <button class="remove-button">&times;</button>
       <a href="https://www.google.com" target="_blank">
         <img src="https://www.google.com/favicon.ico" alt="Google">
         Google
       </a>
     </div>
     <div class="card">
+      <button class="remove-button">&times;</button>
       <a href="https://www.github.com" target="_blank">
         <img src="https://github.com/favicon.ico" alt="GitHub">
         GitHub
       </a>
     </div>
     <div class="card">
+      <button class="remove-button">&times;</button>
       <a href="https://www.reddit.com" target="_blank">
         <img src="https://www.redditstatic.com/favicon.ico" alt="Reddit">
         Reddit
       </a>
     </div>
     <div class="card">
+      <button class="remove-button">&times;</button>
       <a href="https://www.wikipedia.org" target="_blank">
         <img src="https://www.wikipedia.org/static/favicon/wikipedia.ico" alt="Wikipedia">
         Wikipedia
@@ -118,36 +139,56 @@
   </main>
 
   <script>
+    // Function to add remove functionality to a card
+    function addRemoveFunctionality(card) {
+      const removeBtn = card.querySelector(".remove-button");
+      removeBtn.addEventListener("click", () => {
+        card.remove();
+      });
+    }
+
+    // Attach remove functionality to initial cards
+    document.querySelectorAll(".card").forEach(addRemoveFunctionality);
+
+    // Add new shortcut dynamically
     document.getElementById("addShortcut").addEventListener("click", function() {
-      // Prompt the user for the website name and URL
+      // Prompt for website name and URL
       let name = prompt("Enter website name:");
       if (!name) return;
       
       let url = prompt("Enter website URL (include https://):");
       if (!url) return;
       
-      // Use the provided URL to attempt to load the favicon
-      // If favicon not found, browser will display broken image (could be replaced with a default icon if desired)
       let icon = url + "/favicon.ico";
 
-      // Create the new card elements
-      let container = document.querySelector(".container");
+      // Create new card
+      let container = document.getElementById("shortcutContainer");
       let card = document.createElement("div");
       card.className = "card";
 
+      // Create remove button for the card
+      let removeBtn = document.createElement("button");
+      removeBtn.className = "remove-button";
+      removeBtn.innerHTML = "&times;";
+      card.appendChild(removeBtn);
+
+      // Create link element
       let link = document.createElement("a");
       link.href = url;
-      link.target = "_blank"; // Open link in new tab
+      link.target = "_blank";
       
       let image = document.createElement("img");
       image.src = icon;
       image.alt = name;
-
-      // Append the new elements
+      
       link.appendChild(image);
       link.appendChild(document.createTextNode(name));
       card.appendChild(link);
+      
       container.appendChild(card);
+      
+      // Add remove functionality for the newly added card
+      addRemoveFunctionality(card);
     });
   </script>
 </body>
